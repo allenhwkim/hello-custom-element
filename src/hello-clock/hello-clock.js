@@ -1,19 +1,18 @@
-import { HTMLCustomElement } from '../html-custom-element.js';
+import { HTMLCustomElement } from 'html-custom-element';
 
 const template = require('./hello-clock.html');
 const css = require('./hello-clock.scss');
 
 export class HelloClock  extends HTMLCustomElement {
-  init() {
+
+  connectedCallback() {
     this.template = template;
     this.css = css;
+    super.render().then(_ => {
+      this.addAnimations();
+    });
   }
   
-  connectedCallback() {
-    super.connectedCallback();
-    this.addAnimations();
-  }
-
   addAnimations() {
     var now     = new Date(),
     hourDeg   = now.getHours() / 12 * 360 + now.getMinutes() / 60 * 30,
@@ -30,3 +29,5 @@ export class HelloClock  extends HTMLCustomElement {
     this.querySelector('.clock-animations').innerHTML = `<style>${stylesDeg.join('')}</style>`;
   }
 }
+
+HelloClock.define('hello-clock', HelloClock);

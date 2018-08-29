@@ -1,12 +1,13 @@
-import {HTMLCustomElement} from '../html-custom-element';
+import {HTMLCustomElement} from 'html-custom-element';
 
 const template = require('./hello-custom-element.html');
 const css = require('./hello-custom-element.scss');
 
 export class HelloCustomElement extends HTMLCustomElement {
-  init() {
+  connectedCallback() {
     this.template = template;
     this.css = css;
+    super.render().then(_ => {});
   }
 
   updateMessage(message) {
@@ -27,3 +28,5 @@ export class HelloCustomElement extends HTMLCustomElement {
   }
 
 }
+
+HelloCustomElement.define('hello-custom-element', HelloCustomElement);

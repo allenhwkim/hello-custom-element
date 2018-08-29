@@ -6,9 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
   entry: {
-    'hello-custom-element.umd.js': './src/index.js',
-    // 'hello-custom-element.css': './src/index.scss',
-    'hello-custom-element.min.js': './src/browser.js'
+    'hello-custom-element.umd.js': './src/index.js'
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -25,8 +23,7 @@ module.exports = {
       },
       { 
         test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
+        loader: 'babel-loader'
       },
       {
         test:/\.scss$/,
